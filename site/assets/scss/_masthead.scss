@@ -15,10 +15,21 @@
     padding: .8rem 2rem;
     font-weight: 600;
   }
+
   .lead {
     @include font-size(1.5rem);
     font-weight: 400;
     color: $gray-700;
+  }
+
+  .highlight {
+    padding: .5rem 4rem .5rem 1rem;
+    margin-bottom: 0;
+    line-height: 1.25;
+    @include border-radius(.5rem);
+  }
+  .btn-clipboard {
+    top: .5rem;
   }
 }
 
@@ -35,4 +46,8 @@
 
 .masthead-followup-svg {
   filter: drop-shadow(0 1px 0 rgba(0, 0, 0, .125));
+}
+
+.masthead-notice {
+  background-color: #d2f4ea;
 }
