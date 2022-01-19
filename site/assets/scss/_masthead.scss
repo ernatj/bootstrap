@@ -31,6 +31,11 @@
   .btn-clipboard {
     top: .5rem;
   }
+
+  #carbonads { // stylelint-disable-line selector-max-id
+    margin-right: auto;
+    margin-left: auto;
+  }
 }
 
 @include media-breakpoint-up(md) {

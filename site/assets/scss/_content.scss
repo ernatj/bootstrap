@@ -79,3 +79,26 @@
 .bd-bg-purple-bright {
   background-color: $bd-purple-bright;
 }
+
+.bi {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+}
+
+.icon-link {
+  display: flex;
+  align-items: center;
+
+  .bi {
+    width: 1.5em;
+    height: 1.5em;
+    transition: .2s ease-in-out transform; // stylelint-disable-line property-disallowed-list
+  }
+
+  &:hover {
+    .bi {
+      transform: translateX(.25em);
+    }
+  }
+}
