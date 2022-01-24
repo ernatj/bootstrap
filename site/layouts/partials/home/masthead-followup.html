@@ -6,20 +6,132 @@
 -->
 
 <div class="container masthead-followup px-4 px-md-3">
-  <div class="col-md-7 mb-5 pt-5">
+  <div class="col-lg-7 mx-auto mb-5 text-center">
+    <div class="masthead-followup-icon d-inline-block mb-3 text-secondary">
+      {{ partial "icons/code.svg" (dict "width" "32" "height" "32") }}
+    </div>
+    <h2 class="display-5 mb-3 fw-semibold lh-1">Get started anyway you want</h2>
+    <p class="lead fw-normal">
+      Jump right into building with Bootstrap—use the CDN, install it via package manager, or download the source code.
+    </p>
+    <p class="lead fw-normal">
+      <a href="/docs/{{ .Site.Params.docs_version }}/getting-started-download/" class="icon-link fw-semibold justify-content-center ps-4">
+        Read installation docs
+        <svg class="bi"><use xlink:href="#arrow-right-short"></use></svg>
+      </a>
+    </p>
+  </div>
+
+  <section class="row g-5 mb-5 pt-3 pb-5 justify-content-center">
+    <div class="col-lg-6 py-lg-4 pe-lg-5">
+      <h3 class="fw-semibold">Install via package manager</h3>
+      <p class="pe-lg-5">
+        Install Bootstrap’s source Sass and JavaScript files via npm, Composer, or Meteor. Package managed installs don’t include documentation or our full build scripts. You can also <a href="https://github.com/twbs/bootstrap-npm-starter">use our npm template repo</a> to quickly generate a Bootstrap project via npm.
+      </p>
+      {{ highlight "npm install bootstrap" "sh" "" }}
+      {{ highlight (printf ("gem install bootstrap -v %s") .Site.Params.current_ruby_version) "sh" "" }}
+      <p>
+        <a href="/docs/{{ .Site.Params.docs_version }}/getting-started/download/">Read our installation docs</a> for more information and using other package managers.
+      </p>
+    </div>
+    <div class="col-lg-6 py-lg-4 ps-lg-5 border-lg-start">
+      <h3 class="fw-semibold">Include via CDN</h3>
+      <p class="pe-lg-5">
+        When you only need to include Bootstrap’s compiled CSS or JS, you can use <a href="https://www.jsdelivr.com/">jsDelivr</a>. See it in action with our simple <a href="/docs/{{ .Site.Params.docs_version }}/getting-started/introduction/#starter-template">starter template</a>, or <a href="/docs/{{ .Site.Params.docs_version }}/examples/">browse the examples</a> to jumpstart your next project. You can also choose to include Popper and our JS <a href="/docs/{{ .Site.Params.docs_version }}/getting-started/introduction/#separate">separately</a>.
+      </p>
+      {{ highlight (printf (`<!-- CSS only -->
+<link href="%s" rel="stylesheet" integrity=%q crossorigin="anonymous">
+`) .Site.Params.cdn.css (.Site.Params.cdn.css_hash | safeHTMLAttr)) "html" "" }}
+      {{ highlight (printf (`<!-- JavaScript Bundle with Popper -->
+<script src="%s" integrity=%q crossorigin="anonymous"></script>
+`) .Site.Params.cdn.js_bundle (.Site.Params.cdn.js_bundle_hash | safeHTMLAttr)) "html" "" }}
+    </div>
+  </section>
+
+  <div class="row g-5 py-5 mb-5 d-none">
+    <div class="col-md-4">
+      <h3 class="fw-semibold lh-1">Package manager</h3>
+      <!-- <p class="lead fw-normal">
+        Install Bootstrap’s source Sass and JavaScript files via npm, Composer, or Meteor.
+      </p> -->
+      <p>Package managed installs don’t include our full build scripts or documentation. You can also <a href="https://github.com/twbs/bootstrap-npm-starter">use our npm template repo</a> to quickly generate a Bootstrap project via npm.</p>
+      <ul class="nav nav-tabs nav-justified small" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" type="button" role="tab" data-bs-toggle="tab" data-bs-target="#npm" id="npm-tab" aria-controls="npm" aria-selected="true">npm</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" type="button" role="tab" data-bs-toggle="tab" data-bs-target="#ruby" id="ruby-tab" aria-controls="ruby" aria-selected="true">Ruby</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" type="button" role="tab" data-bs-toggle="tab" data-bs-target="#composer" id="composer-tab" aria-controls="composer" aria-selected="true">Composer</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" type="button" role="tab" data-bs-toggle="tab" data-bs-target="#meteor" id="meteor-tab" aria-controls="meteor" aria-selected="true">Meteor</button>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane fade show active" role="tabpanel" id="npm" aria-labelledby="npm-tab">
+          {{ highlight "npm install bootstrap" "sh" "" }}
+        </div>
+        <div class="tab-pane fade" role="tabpanel" id="ruby" aria-labelledby="ruby-tab">
+          {{ highlight (printf ("gem install bootstrap -v %s") .Site.Params.current_ruby_version) "sh" "" }}
+        </div>
+        <div class="tab-pane fade" role="tabpanel" id="composer" aria-labelledby="composer-tab">
+          {{ highlight (printf ("composer require twbs/bootstrap:%s") .Site.Params.current_version) "sh" "" }}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <h3 class="display-6 fw-semibold lh-1">Package manager</h3>
+    </div>
+    <div class="col-md-6 d-none">
+      <ul class="nav nav-pills d-inline-flex mb-3 small p-1 rounded-pill border" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link rounded-pill active" id="package-tab" data-bs-toggle="tab" data-bs-target="#package" type="button" role="tab" aria-controls="package" aria-selected="true">Package</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link rounded-pill" id="cdn-tab" data-bs-toggle="tab" data-bs-target="#cdn" type="button" role="tab" aria-controls="cdn" aria-selected="false">CDN</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link rounded-pill" id="download-tab" data-bs-toggle="tab" data-bs-target="#download" type="button" role="tab" aria-controls="download" aria-selected="false">Download</button>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane fade show active" id="package" role="tabpanel" aria-labelledby="package-tab">
+          {{ highlight "npm install bootstrap" "sh" "" }}
+          {{ highlight (printf ("gem install bootstrap -v %s") .Site.Params.current_ruby_version) "sh" "" }}
+        </div>
+        <div class="tab-pane fade" id="cdn" role="tabpanel" aria-labelledby="cdn-tab">
+          <h3>Just the CSS</h3>
+          <p></p>
+{{ highlight (printf (`<link href="%s" rel="stylesheet" integrity=%q crossorigin="anonymous">
+`) .Site.Params.cdn.css (.Site.Params.cdn.css_hash | safeHTMLAttr)) "html" "" }}
+      {{ highlight (printf (`<!-- JavaScript Bundle with Popper -->
+<script src="%s" integrity=%q crossorigin="anonymous"></script>
+`) .Site.Params.cdn.js_bundle (.Site.Params.cdn.js_bundle_hash | safeHTMLAttr)) "html" "" }}
+        </div>
+        <div class="tab-pane fade" id="download" role="tabpanel" aria-labelledby="download-tab">...</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-7 mb-5 pt-5">
+    <div class="masthead-followup-icon d-inline-block mb-3 text-primary">
+      <svg class="bi fs-1"><use xlink:href="#palette2"></use></svg>
+    </div>
     <h2 class="display-5 mb-3 fw-semibold lh-1">Customize everything with&nbsp;Sass</h2>
     <p class="lead fw-normal">
       Bootstrap utilizes Sass for a modular and customizable architecture. Import only the components you need, enable global options like gradients and shadows, and write your own CSS with our variables, maps, functions, and mixins.
     </p>
     <p class="lead fw-normal">
-      <a href="" class="icon-link fw-semibold">
+      <a href="/docs/{{ .Site.Params.docs_version }}/customize/overview/" class="icon-link fw-semibold">
         Learn more about customizing
         <svg class="bi"><use xlink:href="#arrow-right-short"></use></svg>
       </a>
     </p>
   </div>
   <div class="row g-5 mb-5 pb-5">
-    <div class="col-md-6">
+    <div class="col-lg-6">
       <h3>Include all of Bootstrap’s Sass</h3>
       <p>Import one stylesheet and you're off to the races with every feature of our CSS.</p>
       {{ highlight (printf `// Variable overrides first
@@ -30,8 +142,9 @@ $variable-prefix: "mo-";
 // Then import Bootstrap
 @import "../node_modules/bootstrap/scss/bootstrap";
 `) "scss" "" }}
+      <p>Learn more about our <a href="/docs/{{ .Site.Params.docs_version }}/customize/options/">global Sass options</a>.</p>
     </div>
-    <div class="col-md-6">
+    <div class="col-lg-6">
       <h3>Include what you need</h3>
       <p>The easiest way to customize Bootstrap—include only the CSS you need.</p>
 {{ highlight (printf `// Functions first
@@ -56,23 +169,31 @@ $variable-prefix: "mo-";
 @import "../node_modules/bootstrap/scss/helpers";
 @import "../node_modules/bootstrap/scss/utilities/api";
 `) "scss" "" }}
+      <p>Learn more about <a href="/docs/{{ .Site.Params.docs_version }}/customize/sass/">using Bootstrap with Sass</a>.</p>
     </div>
   </div>
 
-  <div class="row g-5 py-5 align-items-center">
-    <div class="col-md-6 mb-5">
+  <div class="row g-5 py-5 mb-5 align-items-center">
+    <div class="col-lg-6 mb-lg-5">
+      <div class="masthead-followup-icon d-inline-block mb-3 me-2 text-danger">
+        <svg class="bi fs-1"><use xlink:href="#menu-button-wide-fill"></use></svg>
+      </div>
+      <svg class="bi me-2 fs-2 text-muted"><use xlink:href="#plus"></use></svg>
+      <div class="masthead-followup-icon d-inline-block mb-3 text-info">
+        <svg class="bi fs-1"><use xlink:href="#braces-asterisk"></use></svg>
+      </div>
       <h2 class="display-5 mb-3 fw-semibold lh-1">Components, meet the Utility API</h2>
       <p class="lead fw-normal">
-        New in Bootstrap 5, our utilities are now generated by our Utility API. We built it as a feature-packed Sass map that’s easily customizable. Add, remove, or modify any utility classes. Make them responsive, add pseudo-class variants, and create custom names.
+        New in Bootstrap 5, our utilities are now generated by our <a href="/docs/{{ .Site.Params.docs_version }}/utilities/api/">Utility API</a>. We built it as a feature-packed Sass map that can be quickly and easily customized. It's never been easier to add, remove, or modify any utility classes. Make utilities responsive, add pseudo-class variants, and give them custom names.
       </p>
       <p class="lead fw-normal mb-md-0">
-        <a href="" class="icon-link fw-semibold">
+        <a href="/docs/{{ .Site.Params.docs_version }}/utilities/api/" class="icon-link fw-semibold">
           Learn more about utilities
           <svg class="bi"><use xlink:href="#arrow-right-short"></use></svg>
         </a>
       </p>
     </div>
-    <div class="col-md-6">
+    <div class="col-lg-6">
   {{ highlight (printf `@import "bootstrap/scss/functions";
 @import "bootstrap/scss/variables";
 @import "bootstrap/scss/maps";
@@ -95,64 +216,23 @@ $utilities: map-merge(
   </div>
 </div>
 
-
-  <section class="row mb-5 pb-md-4 align-items-center">
-    <div class="col-md-5">
-      <div class="masthead-followup-icon d-inline-block mb-2 text-white bg-success">
-        {{ partial "icons/code.svg" (dict "width" "32" "height" "32") }}
-      </div>
-      <h2 class="display-5 fw-normal">Installation</h2>
-      <p class="lead fw-normal">
-        Install Bootstrap’s source Sass and JavaScript files via npm, Composer, or Meteor.
-      </p>
-      <p>Package managed installs don’t include documentation or our full build scripts. You can also <a href="https://github.com/twbs/bootstrap-npm-starter">use our npm template repo</a> to quickly generate a Bootstrap project via npm.</p>
-      <a class="btn btn-lg btn-outline-primary mb-3" href="/docs/{{ .Site.Params.docs_version }}/getting-started/download/">Read installation docs</a>
-    </div>
-    <div class="col-md-7 ps-md-5">
-      {{ highlight "npm install bootstrap" "sh" "" }}
-      {{ highlight (printf ("gem install bootstrap -v %s") .Site.Params.current_ruby_version) "sh" "" }}
-    </div>
-  </section>
-
-  <section class="row mb-5 pb-md-4 align-items-center">
-    <div class="col-md-5">
-      <div class="masthead-followup-icon d-inline-block mb-2 text-white bg-primary">
-        {{ partial "icons/cloud-fill.svg" (dict "width" "32" "height" "32") }}
-      </div>
-      <h2 class="display-5 fw-normal">jsDelivr</h2>
-      <p class="lead fw-normal">
-        When you only need to include Bootstrap’s compiled CSS or JS, you can use <a href="https://www.jsdelivr.com/">jsDelivr</a>.
-      </p>
-      <p>
-        See it in action with our simple <a href="/docs/{{ .Site.Params.docs_version }}/getting-started/introduction/#starter-template">starter template</a>, or <a href="/docs/{{ .Site.Params.docs_version }}/examples/">browse the examples</a> to jumpstart your next project. You can also choose to include Popper and our JS <a href="/docs/{{ .Site.Params.docs_version }}/getting-started/introduction/#separate">separately</a>.
-      </p>
-      <a class="btn btn-lg btn-outline-primary mb-3" href="/docs/{{ .Site.Params.docs_version }}/getting-started/introduction/">Explore the docs</a>
-    </div>
-    <div class="col-md-7 ps-md-5">
-      {{ highlight (printf (`<!-- CSS only -->
-<link href="%s" rel="stylesheet" integrity=%q crossorigin="anonymous">
-`) .Site.Params.cdn.css (.Site.Params.cdn.css_hash | safeHTMLAttr)) "html" "" }}
-      {{ highlight (printf (`<!-- JavaScript Bundle with Popper -->
-<script src="%s" integrity=%q crossorigin="anonymous"></script>
-`) .Site.Params.cdn.js_bundle (.Site.Params.cdn.js_bundle_hash | safeHTMLAttr)) "html" "" }}
-    </div>
-  </section>
-
-  <section class="row mb-5 pb-md-4 align-items-center">
-    <div class="col-md-5">
-      <div class="masthead-followup-icon d-inline-block mb-2 text-white bd-bg-purple-bright">
+  <section class="row g-5 py-5 align-items-center">
+    <div class="col-lg-6">
+      <div class="masthead-followup-icon d-inline-block mb-3 bd-text-purple-bright">
         {{ partial "icons/circle-square.svg" (dict "width" "32" "height" "32") }}
       </div>
-      <h2 class="display-5 fw-normal">Bootstrap Icons</h2>
+      <h2 class="display-5 mb-3 fw-semibold lh-1">Personalize it with Bootstrap&nbsp;Icons</h2>
       <p class="lead fw-normal">
-        For the first time ever, Bootstrap has its own open source SVG icon library, designed to work best with our components and documentation.
+        <a href="{{ .Site.Params.icons }}">Bootstrap Icons</a> is an open source SVG icon library featuring over 1,500 glyphs, with more added every release. They're designed to work in any project, whether you use Bootstrap itself or not. Use them as SVGs or icon fonts—both options give you vector scaling and easy customization via CSS.
       </p>
-      <p>
-        Bootstrap Icons are designed to work best with Bootstrap components, but they’ll work in any project. They’re SVGs, so they scale quickly and easily, can be implemented in several ways, and can be styled with CSS.
+      <p class="lead fw-normal mb-md-0">
+        <a href="{{ .Site.Params.icons }}" class="icon-link fw-semibold">
+          Get Bootstrap Icons
+          <svg class="bi"><use xlink:href="#arrow-right-short"></use></svg>
+        </a>
       </p>
-      <a href="{{ .Site.Params.icons }}" class="btn btn-lg btn-outline-primary mb-3">Get Bootstrap Icons</a>
     </div>
-    <div class="col-md-7 ps-md-5">
+    <div class="col-lg-6">
         <img class="img-fluid mt-3 mx-auto" srcset="/docs/{{ .Site.Params.docs_version }}/assets/img/bootstrap-icons.png,
                                                     /docs/{{ .Site.Params.docs_version }}/assets/img/bootstrap-icons@2x.png 2x"
                                             src="/docs/{{ .Site.Params.docs_version }}/assets/img/bootstrap-icons.png"
@@ -160,21 +240,23 @@ $utilities: map-merge(
     </div>
   </section>
 
-  <section class="row mb-5 pb-md-4 align-items-center">
-    <div class="col-md-5">
-      <div class="masthead-followup-icon d-inline-block mb-2 text-white bg-danger">
+  <section class="row g-5 py-5 mb-5 align-items-center">
+    <div class="col-lg-6">
+      <div class="masthead-followup-icon d-inline-block mb-3 text-warning">
         {{ partial "icons/droplet-fill.svg" (dict "width" "32" "height" "32") }}
       </div>
-      <h2 class="display-5 fw-normal">Official Themes</h2>
+      <h2 class="display-5 mb-3 fw-semibold lh-1">Make it yours with official Bootstrap Themes</h2>
       <p class="lead fw-normal">
-        Take Bootstrap to the next level with premium themes from the <a href="{{ .Site.Params.themes }}">official Bootstrap Themes marketplace</a>.
+        Take Bootstrap to the next level with premium themes from the <a href="{{ .Site.Params.themes }}">official Bootstrap Themes marketplace</a>. Themes are built on Bootstrap as their own extended frameworks, rich with new components and plugins, documentation, and powerful build tools.
       </p>
-      <p>
-        Themes are built on Bootstrap as their own extended frameworks, rich with new components and plugins, documentation, and powerful build tools.
+      <p class="lead fw-normal mb-md-0">
+        <a href="{{ .Site.Params.themes }}" class="icon-link fw-semibold">
+          Browse Bootstrap Themes
+          <svg class="bi"><use xlink:href="#arrow-right-short"></use></svg>
+        </a>
       </p>
-      <a href="{{ .Site.Params.themes }}" class="btn btn-lg btn-outline-primary mb-3">Browse themes</a>
     </div>
-    <div class="col-md-7 ps-md-5">
+    <div class="col-lg-6">
         <img class="img-fluid mt-3 mx-auto" srcset="/docs/{{ .Site.Params.docs_version }}/assets/img/bootstrap-themes.png,
                                                     /docs/{{ .Site.Params.docs_version }}/assets/img/bootstrap-themes@2x.png 2x"
                                             src="/docs/{{ .Site.Params.docs_version }}/assets/img/bootstrap-themes.png"
